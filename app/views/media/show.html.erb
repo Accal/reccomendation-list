@@ -1,0 +1,41 @@
+<div class='container'>
+  <div style='text-align: center'>
+    <h1>Recommendation</h1>
+    <div class='list-group-item'>
+      <strong>Title:</strong>
+      <%= @medium.title %>
+    </div>
+    <div class='list-group-item'>
+      <strong>Suggested by:</strong>
+      <%= @medium.suggested_by %>
+    </div>
+    <% if @medium.rating %>
+      <div class='list-group-item'>
+        <strong>Rating:</strong>
+        <%= @medium.rating %>
+      </div>
+    <% end %>
+    <div class='list-group-item'>
+      <strong>Media:</strong>
+      <%= @medium.media_type.capitalize %>
+    </div>
+    <div class='list-group-item'>
+      <strong>Reason for Suggestion:</strong>
+      <%= @medium.suggestion_reason %>
+    </div>
+    <% if @medium.link.present? %>
+      <div class='list-group-item'>
+        <strong>Website:</strong>
+        <%= link_to 'Additional content', @medium.link %>
+      </div>
+    <% end %>
+    <br>
+    <% if @medium.reviewed %>
+      <%= link_to 'My Review', medium_review_path(@medium.id, @medium.review.id), class: 'btn btn-outline-info' %>
+    <% else %>
+      <%= link_to 'Review', new_medium_review_path(@medium), class: 'btn btn-outline-info' %>
+    <% end %>
+    <%= link_to 'Edit', edit_medium_path(@medium), class: 'btn btn-outline-secondary' %>
+    <%= link_to 'Delete', @medium, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+  </div>
+</div>

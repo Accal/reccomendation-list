@@ -1,0 +1,18 @@
+<div class='container' style='text-align: center'>
+  <h1>Recent Reviews</h1>
+  <!-- <h3 class='text-secondary'><%= Time.now.last_month.strftime('%B') %></h3> -->
+  <br>
+  <br>
+    <% @reviews.each do |review| %>
+      <div class='list-group-item' style='text-align: center'>
+          <p>
+            <%= render 'shared/stars', percent: review.stars_as_percent %>
+            <br>
+            <%= link_to(review.medium.title, medium_path(review.medium)) %>
+          </p>
+          <p><%= review.medium.media_type.capitalize %></p>
+          <p><%= review.comment %></p>
+          <span class='text-secondary'> <%= link_to("(Created #{time_ago_in_words(review.created_at)} ago)", medium_review_path(review.medium.id, review.id)) %></span>
+    </div>
+  <% end %>
+</div>
